@@ -4,7 +4,7 @@
 #
 Name     : qca-qt5
 Version  : 2.1.0.3
-Release  : 1
+Release  : 2
 URL      : https://download.kde.org/stable/qca-qt5/2.1.0.3/src/qca-qt5-2.1.0.3.tar.xz
 Source0  : https://download.kde.org/stable/qca-qt5/2.1.0.3/src/qca-qt5-2.1.0.3.tar.xz
 Summary  : No detailed summary available
