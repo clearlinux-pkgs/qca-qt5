@@ -4,7 +4,7 @@
 #
 Name     : qca-qt5
 Version  : 2.2.1
-Release  : 6
+Release  : 7
 URL      : https://github.com/KDE/qca/archive/v2.2.1/qca-2.2.1.tar.gz
 Source0  : https://github.com/KDE/qca/archive/v2.2.1/qca-2.2.1.tar.gz
 Summary  : No detailed summary available
@@ -20,15 +20,17 @@ BuildRequires : doxygen
 BuildRequires : extra-cmake-modules pkgconfig(libsasl2)
 BuildRequires : openssl-dev
 BuildRequires : pkg-config
+BuildRequires : qtbase-dev
 BuildRequires : qtbase-dev mesa-dev
+BuildRequires : qtsvg-dev
 Patch1: build.patch
 
 %description
-qca-softstore -- Software certificate store Plug-in to QCA
-ABOUT
-qca-softstore provides simple persistent certificate store for QCA framework.
-The plug-in defers the private key access and passphrase prompt to the point
-it is actually required, thus enabling the use of files stored on removable media.
+Qt Cryptographic Architecture (QCA) version 2.1.0
+-------------------------------------------------
+Date: November 6th, 2014
+Website: http://delta.affinix.com/qca/
+Mailing List: Delta Project <delta@lists.affinix.com>
 
 %package bin
 Summary: bin components for the qca-qt5 package.
@@ -78,52 +80,54 @@ man components for the qca-qt5 package.
 
 %prep
 %setup -q -n qca-2.2.1
+cd %{_builddir}/qca-2.2.1
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1556985477
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1588706399
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test
 
 %install
-export SOURCE_DATE_EPOCH=1556985477
+export SOURCE_DATE_EPOCH=1588706399
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qca-qt5
-cp COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/COPYING
-cp cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/qca-qt5/cmake_modules_COPYING-CMAKE-SCRIPTS
-cp plugins/qca-botan/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-botan_COPYING
-cp plugins/qca-cyrus-sasl/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-cyrus-sasl_COPYING
-cp plugins/qca-gcrypt/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-gcrypt_COPYING
-cp plugins/qca-gnupg/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-gnupg_COPYING
-cp plugins/qca-logger/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-logger_COPYING
-cp plugins/qca-nss/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-nss_COPYING
-cp plugins/qca-ossl/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-ossl_COPYING
-cp plugins/qca-pkcs11/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-pkcs11_COPYING
-cp plugins/qca-softstore/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-softstore_COPYING
-cp plugins/qca-wincrypto/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-wincrypto_COPYING
-cp plugins/qca-wingss/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/plugins_qca-wingss_COPYING
-cp src/botantools/botan/license.txt %{buildroot}/usr/share/package-licenses/qca-qt5/src_botantools_botan_license.txt
+cp %{_builddir}/qca-2.2.1/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3
+cp %{_builddir}/qca-2.2.1/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/qca-qt5/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/qca-2.2.1/plugins/qca-botan/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-cyrus-sasl/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-gcrypt/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-gnupg/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-logger/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-nss/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-ossl/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-pkcs11/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-softstore/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-wincrypto/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/plugins/qca-wingss/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+cp %{_builddir}/qca-2.2.1/src/botantools/botan/license.txt %{buildroot}/usr/share/package-licenses/qca-qt5/902feeccfae30f0eb980e0f50b222cdd2c2df694
 pushd clr-build
 %make_install
 popd
@@ -176,20 +180,10 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/qca-qt5/COPYING
-/usr/share/package-licenses/qca-qt5/cmake_modules_COPYING-CMAKE-SCRIPTS
-/usr/share/package-licenses/qca-qt5/plugins_qca-botan_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-cyrus-sasl_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-gcrypt_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-gnupg_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-logger_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-nss_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-ossl_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-pkcs11_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-softstore_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-wincrypto_COPYING
-/usr/share/package-licenses/qca-qt5/plugins_qca-wingss_COPYING
-/usr/share/package-licenses/qca-qt5/src_botantools_botan_license.txt
+/usr/share/package-licenses/qca-qt5/902feeccfae30f0eb980e0f50b222cdd2c2df694
+/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3
+/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+/usr/share/package-licenses/qca-qt5/ff3ed70db4739b3c6747c7f624fe2bad70802987
 
 %files man
 %defattr(0644,root,root,0755)
