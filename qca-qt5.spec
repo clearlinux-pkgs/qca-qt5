@@ -6,7 +6,7 @@
 #
 Name     : qca-qt5
 Version  : 2.3.1
-Release  : 13
+Release  : 14
 URL      : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz
 Source0  : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz
 Source1  : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz.sig
@@ -90,7 +90,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1594069308
+export SOURCE_DATE_EPOCH=1604594914
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -113,7 +113,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test
 
 %install
-export SOURCE_DATE_EPOCH=1594069308
+export SOURCE_DATE_EPOCH=1604594914
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qca-qt5
 cp %{_builddir}/qca-2.3.1/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3
