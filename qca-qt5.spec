@@ -6,7 +6,7 @@
 #
 Name     : qca-qt5
 Version  : 2.3.1
-Release  : 12
+Release  : 13
 URL      : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz
 Source0  : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz
 Source1  : https://download.kde.org/stable/qca/2.3.1/qca-2.3.1.tar.xz.sig
