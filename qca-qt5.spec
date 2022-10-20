@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xB92A5F04EC949121 (sitter@kde.org)
 #
 Name     : qca-qt5
-Version  : 2.3.4
-Release  : 21
-URL      : https://download.kde.org/stable/qca/2.3.4/qca-2.3.4.tar.xz
-Source0  : https://download.kde.org/stable/qca/2.3.4/qca-2.3.4.tar.xz
-Source1  : https://download.kde.org/stable/qca/2.3.4/qca-2.3.4.tar.xz.sig
+Version  : 2.3.5
+Release  : 22
+URL      : https://download.kde.org/stable/qca/2.3.5/qca-2.3.5.tar.xz
+Source0  : https://download.kde.org/stable/qca/2.3.5/qca-2.3.5.tar.xz
+Source1  : https://download.kde.org/stable/qca/2.3.5/qca-2.3.5.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause LGPL-2.1
@@ -81,15 +81,15 @@ man components for the qca-qt5 package.
 
 
 %prep
-%setup -q -n qca-2.3.4
-cd %{_builddir}/qca-2.3.4
+%setup -q -n qca-2.3.5
+cd %{_builddir}/qca-2.3.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1663080127
+export SOURCE_DATE_EPOCH=1666276759
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -112,7 +112,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test || :
 
 %install
-export SOURCE_DATE_EPOCH=1663080127
+export SOURCE_DATE_EPOCH=1666276759
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qca-qt5
 cp %{_builddir}/qca-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3 || :
@@ -172,7 +172,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libqca-qt5.so.2
-/usr/lib64/libqca-qt5.so.2.3.4
+/usr/lib64/libqca-qt5.so.2.3.5
 /usr/lib64/qca-qt5/crypto/libqca-botan.so
 /usr/lib64/qca-qt5/crypto/libqca-cyrus-sasl.so
 /usr/lib64/qca-qt5/crypto/libqca-gnupg.so
