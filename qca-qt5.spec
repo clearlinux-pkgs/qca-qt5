@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xB92A5F04EC949121 (sitter@kde.org)
 #
 Name     : qca-qt5
-Version  : 2.3.6
-Release  : 24
-URL      : https://download.kde.org/stable/qca/2.3.6/qca-2.3.6.tar.xz
-Source0  : https://download.kde.org/stable/qca/2.3.6/qca-2.3.6.tar.xz
-Source1  : https://download.kde.org/stable/qca/2.3.6/qca-2.3.6.tar.xz.sig
+Version  : 2.3.7
+Release  : 25
+URL      : https://download.kde.org/stable/qca/2.3.7/qca-2.3.7.tar.xz
+Source0  : https://download.kde.org/stable/qca/2.3.7/qca-2.3.7.tar.xz
+Source1  : https://download.kde.org/stable/qca/2.3.7/qca-2.3.7.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause LGPL-2.1
@@ -86,15 +86,15 @@ man components for the qca-qt5 package.
 
 
 %prep
-%setup -q -n qca-2.3.6
-cd %{_builddir}/qca-2.3.6
+%setup -q -n qca-2.3.7
+cd %{_builddir}/qca-2.3.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689015725
+export SOURCE_DATE_EPOCH=1690895235
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -136,7 +136,7 @@ cd ../clr-build-avx2;
 make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1689015725
+export SOURCE_DATE_EPOCH=1690895235
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qca-qt5
 cp %{_builddir}/qca-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3 || :
@@ -201,7 +201,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libqca-qt5.so.2.3.6
+/V3/usr/lib64/libqca-qt5.so.2.3.7
 /V3/usr/lib64/qca-qt5/crypto/libqca-botan.so
 /V3/usr/lib64/qca-qt5/crypto/libqca-cyrus-sasl.so
 /V3/usr/lib64/qca-qt5/crypto/libqca-gnupg.so
@@ -210,7 +210,7 @@ popd
 /V3/usr/lib64/qca-qt5/crypto/libqca-ossl.so
 /V3/usr/lib64/qca-qt5/crypto/libqca-softstore.so
 /usr/lib64/libqca-qt5.so.2
-/usr/lib64/libqca-qt5.so.2.3.6
+/usr/lib64/libqca-qt5.so.2.3.7
 /usr/lib64/qca-qt5/crypto/libqca-botan.so
 /usr/lib64/qca-qt5/crypto/libqca-cyrus-sasl.so
 /usr/lib64/qca-qt5/crypto/libqca-gnupg.so
