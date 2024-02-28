@@ -9,13 +9,17 @@
 #
 Name     : qca-qt5
 Version  : 2.3.8
-Release  : 31
+Release  : 32
 URL      : https://download.kde.org/stable/qca/2.3.8/qca-2.3.8.tar.xz
 Source0  : https://download.kde.org/stable/qca/2.3.8/qca-2.3.8.tar.xz
 Source1  : https://download.kde.org/stable/qca/2.3.8/qca-2.3.8.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause LGPL-2.1
+Requires: qca-qt5-bin = %{version}-%{release}
+Requires: qca-qt5-lib = %{version}-%{release}
+Requires: qca-qt5-license = %{version}-%{release}
+Requires: qca-qt5-man = %{version}-%{release}
 BuildRequires : Botan-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
@@ -37,6 +41,52 @@ Qt Cryptographic Architecture (QCA)
 Description
 -----------
 
+%package bin
+Summary: bin components for the qca-qt5 package.
+Group: Binaries
+Requires: qca-qt5-license = %{version}-%{release}
+
+%description bin
+bin components for the qca-qt5 package.
+
+
+%package dev
+Summary: dev components for the qca-qt5 package.
+Group: Development
+Requires: qca-qt5-lib = %{version}-%{release}
+Requires: qca-qt5-bin = %{version}-%{release}
+Provides: qca-qt5-devel = %{version}-%{release}
+Requires: qca-qt5 = %{version}-%{release}
+
+%description dev
+dev components for the qca-qt5 package.
+
+
+%package lib
+Summary: lib components for the qca-qt5 package.
+Group: Libraries
+Requires: qca-qt5-license = %{version}-%{release}
+
+%description lib
+lib components for the qca-qt5 package.
+
+
+%package license
+Summary: license components for the qca-qt5 package.
+Group: Default
+
+%description license
+license components for the qca-qt5 package.
+
+
+%package man
+Summary: man components for the qca-qt5 package.
+Group: Default
+
+%description man
+man components for the qca-qt5 package.
+
+
 %prep
 %setup -q -n qca-2.3.8
 cd %{_builddir}/qca-2.3.8
@@ -46,7 +96,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1709079688
+export SOURCE_DATE_EPOCH=1709081998
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -116,7 +166,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1709079688
+export SOURCE_DATE_EPOCH=1709081998
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/qca-qt5
 cp %{_builddir}/qca-%{version}/COPYING %{buildroot}/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3 || :
@@ -146,3 +196,68 @@ popd
 
 %files
 %defattr(-,root,root,-)
+/usr/mkspecs/features/crypto.prf
+
+%files bin
+%defattr(-,root,root,-)
+/V3/usr/bin/mozcerts-qt5
+/V3/usr/bin/qcatool-qt5
+/usr/bin/mozcerts-qt5
+/usr/bin/qcatool-qt5
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/Qca-qt5/QtCrypto/QtCrypto
+/usr/include/Qca-qt5/QtCrypto/qca.h
+/usr/include/Qca-qt5/QtCrypto/qca_basic.h
+/usr/include/Qca-qt5/QtCrypto/qca_cert.h
+/usr/include/Qca-qt5/QtCrypto/qca_core.h
+/usr/include/Qca-qt5/QtCrypto/qca_export.h
+/usr/include/Qca-qt5/QtCrypto/qca_keystore.h
+/usr/include/Qca-qt5/QtCrypto/qca_publickey.h
+/usr/include/Qca-qt5/QtCrypto/qca_safetimer.h
+/usr/include/Qca-qt5/QtCrypto/qca_securelayer.h
+/usr/include/Qca-qt5/QtCrypto/qca_securemessage.h
+/usr/include/Qca-qt5/QtCrypto/qca_support.h
+/usr/include/Qca-qt5/QtCrypto/qca_textfilter.h
+/usr/include/Qca-qt5/QtCrypto/qca_tools.h
+/usr/include/Qca-qt5/QtCrypto/qca_version.h
+/usr/include/Qca-qt5/QtCrypto/qcaprovider.h
+/usr/include/Qca-qt5/QtCrypto/qpipe.h
+/usr/lib64/cmake/Qca-qt5/Qca-qt5Config.cmake
+/usr/lib64/cmake/Qca-qt5/Qca-qt5ConfigVersion.cmake
+/usr/lib64/cmake/Qca-qt5/Qca-qt5Targets-relwithdebinfo.cmake
+/usr/lib64/cmake/Qca-qt5/Qca-qt5Targets.cmake
+/usr/lib64/libqca-qt5.so
+/usr/lib64/pkgconfig/qca2-qt5.pc
+
+%files lib
+%defattr(-,root,root,-)
+/V3/usr/lib64/libqca-qt5.so.2.3.8
+/V3/usr/lib64/qca-qt5/crypto/libqca-botan.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-cyrus-sasl.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-gnupg.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-logger.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-nss.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-ossl.so
+/V3/usr/lib64/qca-qt5/crypto/libqca-softstore.so
+/usr/lib64/libqca-qt5.so.2
+/usr/lib64/libqca-qt5.so.2.3.8
+/usr/lib64/qca-qt5/crypto/libqca-botan.so
+/usr/lib64/qca-qt5/crypto/libqca-cyrus-sasl.so
+/usr/lib64/qca-qt5/crypto/libqca-gnupg.so
+/usr/lib64/qca-qt5/crypto/libqca-logger.so
+/usr/lib64/qca-qt5/crypto/libqca-nss.so
+/usr/lib64/qca-qt5/crypto/libqca-ossl.so
+/usr/lib64/qca-qt5/crypto/libqca-softstore.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/qca-qt5/902feeccfae30f0eb980e0f50b222cdd2c2df694
+/usr/share/package-licenses/qca-qt5/caeb68c46fa36651acf592771d09de7937926bb3
+/usr/share/package-licenses/qca-qt5/e60c2e780886f95df9c9ee36992b8edabec00bcc
+/usr/share/package-licenses/qca-qt5/ff3ed70db4739b3c6747c7f624fe2bad70802987
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/qcatool-qt5.1
